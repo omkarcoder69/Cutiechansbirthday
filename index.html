@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Khushi / Cutiechan ❤️</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons & Confetti -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg1: '#fdf2f8', 
+                            bg2: '#f3e8ff', 
+                            text: '#374151', 
+                            accent: '#fbcfe8', 
+                            accentDark: '#f472b6' 
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'float-medium': 'float 6s ease-in-out infinite alternate',
+                        'float-fast': 'float 4s ease-in-out infinite alternate-reverse',
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+                        'float-up': 'floatUp 1.5s ease-out forwards'
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: 0, transform: 'translateY(20px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.05)' },
+                        },
+                        pulseSoft: {
+                            '0%, 100%': { transform: 'scale(1)', opacity: 0.8 },
+                            '50%': { transform: 'scale(1.05)', opacity: 1 },
+                        },
+                        floatUp: {
+                            '0%': { transform: 'translateY(0) scale(0.5)', opacity: 1 },
+                            '100%': { transform: 'translateY(-60px) scale(1.2)', opacity: 0 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fef5f9 50%, #f3e8ff 100%);
+            color: #374151;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        button, a { cursor: pointer; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(244, 114, 182, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(244, 114, 182, 0.15);
+        }
+
+        #hiddenMessageContainer {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-10px);
+        }
+
+        #hiddenMessageContainer.revealed {
+            max-height: 2000px;
+            opacity: 1;
+            transform: translateY(0);
+            margin-top: 2rem;
+        }
+
+        .doodle-blend {
+            mix-blend-mode: multiply;
+            filter: grayscale(100%) contrast(1.2) opacity(0.45);
+            pointer-events: none;
+        }
+
+        .soot-sprite {
+            position: relative; background-color: #2d3748; border-radius: 50%;
+            box-shadow: 0 0 8px rgba(0,0,0,0.2); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer; pointer-events: auto;
+        }
+        .soot-eye { position: absolute; background-color: white; border-radius: 50%; transition: all 0.2s ease; }
+        .soot-pupil { position: absolute; background-color: #1a202c; border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: all 0.2s ease; }
+        .soot-sprite:hover { transform: scale(1.3) translateY(-10px) !important; background-color: #1a202c; }
+
+        .petal {
+            position: fixed; background: linear-gradient(135deg, #fbcfe8 0%, #fce7f3 100%);
+            border-radius: 15px 0 15px 0; opacity: 0.6; pointer-events: none; z-index: 5;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg) scale(1); opacity: 0; }
+            10% { opacity: 0.8; } 90% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg) scale(0.5); opacity: 0; }
+        }
+
+        .fade-text { animation: fadeInText 0.5s ease-in-out; }
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-accent selection:text-brand-text relative flex flex-col items-center justify-center p-6" id="interactiveBody">
+
+    <!-- Audio Player (Soft Music Box) -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1ab7b57fa3.mp3?filename=music-box-104936.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle -->
+    <button id="musicToggle" class="fixed bottom-6 right-6 z-50 p-4 rounded-full glass-panel text-brand-text hover:text-brand-accentDark transition-all shadow-lg flex items-center justify-center group hover:scale-110">
+        <i data-lucide="music" id="musicIcon" class="w-5 h-5 transition-transform group-hover:rotate-12"></i>
+    </button>
+
+    <div id="sakuraContainer" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Parallax Decor -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" id="parallaxContainer">
+        <div class="parallax-layer absolute top-[10%] left-[15%]" data-speed="-2">
+            <i data-lucide="heart" class="w-8 h-8 text-pink-200 fill-pink-100 animate-float-slow opacity-60 transform rotate-12"></i>
+        </div>
+        <div class="parallax-layer absolute top-[20%] right-[20%]" data-speed="3">
+            <i data-lucide="sparkles" class="w-6 h-6 text-purple-200 animate-float-fast opacity-70"></i>
+        </div>
+        <div class="parallax-layer absolute bottom-[30%] left-[10%]" data-speed="1.5">
+            <i data-lucide="heart" class="w-6 h-6 text-pink-300 fill-pink-50 animate-float-medium opacity-50 -rotate-12"></i>
+        </div>
+        
+        <div class="parallax-layer absolute -bottom-10 -left-10 md:left-0 pointer-events-none" data-speed="1">
+            <img src="https://images.unsplash.com/photo-1544305193-87a41926ec03?q=80&w=400&auto=format&fit=crop" alt="Girl Doodle" class="w-64 md:w-80 h-auto rounded-full doodle-blend animate-float-slow">
+        </div>
+
+        <div class="parallax-layer absolute bottom-[25%] left-[25%] hidden md:block" data-speed="5">
+            <div class="soot-sprite w-10 h-10 animate-float-fast">
+                <div class="soot-eye w-3 h-3 top-2 left-1.5"><div class="soot-pupil w-1.5 h-1.5"></div></div>
+                <div class="soot-eye w-3 h-3 top-1.5 right-1.5"><div class="soot-pupil w-1.5 h-1.5"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center text-center animate-fade-in-up mt-10">
+        
+        <div id="standardHeader">
+            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-brand-text mb-12 leading-tight pointer-events-none">
+                Something special <br/>
+                <span class="italic text-brand-accentDark">is coming...</span>
+            </h1>
+        </div>
+
+        <div id="birthdayHeader" class="hidden mb-12">
+            <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-brand-accentDark mb-4 drop-shadow-sm">
+                Happy Birthday Khushi! 🎂
+            </h1>
+            <p class="text-gray-500 font-light tracking-wide text-lg mt-2 italic">The wait is finally over.</p>
+        </div>
+
+        <!-- Timer Section -->
+        <div id="timerContainer" class="w-full transition-opacity duration-1000">
+            <div class="w-full flex justify-center items-end space-x-2 md:space-x-8 mb-6 pointer-events-none">
+                <div class="flex flex-col items-center">
+                    <span id="days" class="font-serif text-4xl md:text-7xl lg:text-8xl text-brand-text tabular-nums tracking-tighter">00</span>
+                    <span class="text-[10px] md:text-sm tracking-[0.2em] text-gray-400 mt-2 uppercase font-medium">Days</span>
+                </div>
+                <span class="font-serif text-2xl md:text-5xl lg:text-6xl text-pink-200 mb-4 md:mb-8">•</span>
+                <div class="flex flex-col items-center">
+                    <span id="hours" class="font-serif text-4xl md:text-7xl lg:text-8xl text-brand-text tabular-nums tracking-tighter">00</span>
+                    <span class="text-[10px] md:text-sm tracking-[0.2em] text-gray-400 mt-2 uppercase font-medium">Hours</span>
+                </div>
+                <span class="font-serif text-2xl md:text-5xl lg:text-6xl text-pink-200 mb-4 md:mb-8">•</span>
+                <div class="flex flex-col items-center">
+                    <span id="minutes" class="font-serif text-4xl md:text-7xl lg:text-8xl text-brand-text tabular-nums tracking-tighter">00</span>
+                    <span class="text-[10px] md:text-sm tracking-[0.2em] text-gray-400 mt-2 uppercase font-medium">Mins</span>
+                </div>
+                <!-- Desktop Seconds -->
+                <span class="font-serif text-2xl md:text-5xl lg:text-6xl text-pink-200 mb-4 md:mb-8 hidden sm:block">•</span>
+                <div class="flex-col items-center hidden sm:flex">
+                    <span id="seconds" class="font-serif text-4xl md:text-7xl lg:text-8xl text-brand-text tabular-nums tracking-tighter">00</span>
+                    <span class="text-[10px] md:text-sm tracking-[0.2em] text-gray-400 mt-2 uppercase font-medium">Secs</span>
+                </div>
+            </div>
+            
+            <!-- Mobile only Seconds row -->
+            <div class="flex justify-center sm:hidden mb-6 pointer-events-none items-center space-x-2">
+                 <span id="seconds-mobile" class="font-serif text-4xl text-brand-accentDark tabular-nums tracking-tighter">00</span>
+                 <span class="text-[10px] tracking-[0.2em] text-gray-400 mt-1 uppercase font-medium">Seconds</span>
+            </div>
+
+            <p class="text-gray-500 font-light tracking-wide mb-16 text-sm md:text-base pointer-events-none">
+                Counting down to your special day.
+            </p>
+        </div>
+
+        <!-- Reveal Button -->
+        <button id="revealBtn" class="group relative px-8 py-4 bg-white/90 hover:bg-white border border-pink-100 rounded-full text-brand-text font-medium tracking-wide shadow-sm hover:shadow-lg transition-all duration-300 flex items-center space-x-3 overflow-hidden z-20">
+            <span class="relative z-10" id="btnText">Tap for a little message</span>
+            <i data-lucide="mail" id="btnIcon" class="w-4 h-4 text-brand-accentDark relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
+            <div class="absolute inset-0 bg-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+        </button>
+
+        <!-- Hidden Message Container -->
+        <div id="hiddenMessageContainer" class="w-full max-w-lg px-6 z-20">
+            <div class="glass-panel p-8 md:p-10 rounded-2xl relative cursor-default">
+                
+                <!-- Polaroid Image Frame -->
+                <div class="w-48 h-56 mx-auto mb-8 relative group">
+                    <div class="absolute inset-0 bg-white rounded-xl shadow-xl transform rotate-3 transition-transform duration-500 group-hover:rotate-6"></div>
+                    <div class="absolute inset-0 bg-white rounded-xl shadow-lg p-2 transform -rotate-2 transition-transform duration-500 group-hover:-rotate-4 flex flex-col">
+                        <img src="image_0e7d24.png" alt="Khushi" class="w-full h-40 object-cover rounded-lg shadow-inner">
+                        <span class="font-serif text-brand-text text-sm text-center mt-3 italic text-gray-500">March 15th ❤️</span>
+                    </div>
+                </div>
+
+                <p class="font-serif text-lg md:text-xl text-brand-text leading-relaxed italic mb-8">
+                    "Happy Birthday Khushi, <br/>
+                    my cutie chan ❤️<br/><br/>
+                    Every single day with you is a beautiful adventure. I am so incredibly lucky to have you in my life. <br/><br/>
+                    I can't wait to celebrate you today, tomorrow, and always."
+                </p>
+
+                <!-- P.S. Tap Me Button -->
+                <div class="border-t border-pink-100 pt-8 mt-6 flex flex-col items-center">
+                    <button id="complimentBtn" class="px-6 py-2 bg-pink-50 hover:bg-pink-100 text-brand-accentDark text-sm font-medium rounded-full transition-all duration-300 flex items-center space-x-2 group active:scale-95 shadow-sm">
+                        <span>P.S. Tap me</span>
+                        <i data-lucide="sparkles" class="w-4 h-4 group-hover:rotate-12"></i>
+                    </button>
+                    <div class="mt-6 h-12 flex items-center justify-center">
+                        <p id="complimentText" class="text-sm font-serif text-gray-600 italic text-center leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // --- MUSIC LOGIC ---
+        const bgMusic = document.getElementById('bgMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const musicIcon = document.getElementById('musicIcon');
+        let isMusicPlaying = false;
+
+        musicToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicIcon.setAttribute('data-lucide', 'music');
+            } else {
+                bgMusic.volume = 0.4;
+                bgMusic.play().catch(() => {});
+                musicIcon.setAttribute('data-lucide', 'music-2'); 
+            }
+            isMusicPlaying = !isMusicPlaying;
+            lucide.createIcons();
+        });
+
+        // --- TIMER LOGIC (Target: March 15) ---
+        function updateCountdown() {
+            const now = new Date();
+            const currentMonth = now.getMonth(); 
+            const currentDay = now.getDate();
+            
+            // Birthday Logic (March 15)
+            if (currentMonth === 2 && currentDay === 15) {
+                document.getElementById('timerContainer').classList.add('hidden');
+                document.getElementById('standardHeader').classList.add('hidden');
+                document.getElementById('birthdayHeader').classList.remove('hidden');
+                return;
+            }
+
+            let targetDate = new Date(now.getFullYear(), 2, 15, 0, 0, 0); 
+            if (now > targetDate) targetDate = new Date(now.getFullYear() + 1, 2, 15, 0, 0, 0);
+
+            const diff = targetDate - now;
+            if (diff > 0) {
+                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                
+                const secs = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                const secEl = document.getElementById('seconds');
+                const secMobEl = document.getElementById('seconds-mobile');
+                if (secEl) secEl.innerText = secs;
+                if (secMobEl) secMobEl.innerText = secs;
+            }
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // --- INTERACTION LOGIC ---
+        const revealBtn = document.getElementById('revealBtn');
+        const hiddenMessageContainer = document.getElementById('hiddenMessageContainer');
+        const complimentBtn = document.getElementById('complimentBtn');
+        const complimentText = document.getElementById('complimentText');
+        const btnText = document.getElementById('btnText');
+        const btnIcon = document.getElementById('btnIcon');
+        let isRevealed = false;
+
+        const compliments = [
+            "You have the most beautiful smile. 😊",
+            "You make my world so much brighter.",
+            "I love your laugh more than anything.",
+            "You are literally the cutest person ever.",
+            "Just thinking about you gives me butterflies. 🦋",
+            "You're my favorite notification. 📱",
+            "You're even prettier than a Ghibli movie.",
+            "I could look at you forever.",
+            "You are my favorite part of every day."
+        ];
+
+        revealBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const now = new Date();
+            
+            // Only reveals if it's March 15th
+            if (now.getMonth() !== 2 || now.getDate() !== 15) {
+                btnText.innerText = "Locked until March 15th ❤️";
+                setTimeout(() => { btnText.innerText = "Tap for a little message"; }, 2000);
+                return;
+            }
+
+            if (!isRevealed) {
+                confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+                hiddenMessageContainer.classList.add('revealed');
+                btnText.innerText = "Message opened";
+                btnIcon.setAttribute('data-lucide', 'mail-open');
+                lucide.createIcons();
+                isRevealed = true;
+                setTimeout(generateCompliment, 800);
+            }
+        });
+
+        function generateCompliment() {
+            complimentText.classList.remove('fade-text');
+            void complimentText.offsetWidth; 
+            complimentText.innerText = compliments[Math.floor(Math.random() * compliments.length)];
+            complimentText.classList.add('fade-text');
+        }
+
+        complimentBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            generateCompliment();
+        });
+
+        // --- SAKURA PETALS ---
+        function createPetal() {
+            const petal = document.createElement('div');
+            const duration = Math.random() * 5 + 5;
+            petal.className = 'petal';
+            petal.style.width = petal.style.height = `${Math.random() * 10 + 5}px`;
+            petal.style.left = `${Math.random() * 100}vw`;
+            petal.style.animationDuration = `${duration}s`;
+            document.getElementById('sakuraContainer').appendChild(petal);
+            setTimeout(() => petal.remove(), duration * 1000);
+        }
+        setInterval(createPetal, 400);
+
+        // --- PARALLAX ---
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+            document.querySelectorAll('.parallax-layer').forEach(layer => {
+                layer.style.transform = `translate(${x * (layer.getAttribute('data-speed') || 1)}px, ${y * (layer.getAttribute('data-speed') || 1)}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
