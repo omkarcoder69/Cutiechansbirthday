@@ -103,6 +103,7 @@
             opacity: 1;
             transform: translateY(0);
             margin-top: 2rem;
+            margin-bottom: 4rem;
         }
 
         .doodle-blend {
@@ -141,9 +142,9 @@
 </head>
 <body class="antialiased selection:bg-brand-accent selection:text-brand-text relative flex flex-col items-center justify-center p-6" id="interactiveBody">
 
-    <!-- Audio Player (Soft Music Box) -->
+    <!-- Audio Player -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1ab7b57fa3.mp3?filename=music-box-104936.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/audio/2022/11/22/audio_141671239c.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Music Toggle -->
@@ -166,7 +167,7 @@
         </div>
         
         <div class="parallax-layer absolute -bottom-10 -left-10 md:left-0 pointer-events-none" data-speed="1">
-            <img src="https://images.unsplash.com/photo-1544305193-87a41926ec03?q=80&w=400&auto=format&fit=crop" alt="Girl Doodle" class="w-64 md:w-80 h-auto rounded-full doodle-blend animate-float-slow">
+            <img src="https://images.unsplash.com/photo-1544305193-87a41926ec03?q=80&w=400&auto=format&fit=crop" alt="Doodle" class="w-64 md:w-80 h-auto rounded-full doodle-blend animate-float-slow">
         </div>
 
         <div class="parallax-layer absolute bottom-[25%] left-[25%] hidden md:block" data-speed="5">
@@ -177,7 +178,7 @@
         </div>
     </div>
 
-    <!-- Main Content -->
+    <!-- Main Content Row -->
     <main class="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center text-center animate-fade-in-up mt-10">
         
         <div id="standardHeader">
@@ -211,7 +212,6 @@
                     <span id="minutes" class="font-serif text-4xl md:text-7xl lg:text-8xl text-brand-text tabular-nums tracking-tighter">00</span>
                     <span class="text-[10px] md:text-sm tracking-[0.2em] text-gray-400 mt-2 uppercase font-medium">Mins</span>
                 </div>
-                <!-- Desktop Seconds -->
                 <span class="font-serif text-2xl md:text-5xl lg:text-6xl text-pink-200 mb-4 md:mb-8 hidden sm:block">•</span>
                 <div class="flex-col items-center hidden sm:flex">
                     <span id="seconds" class="font-serif text-4xl md:text-7xl lg:text-8xl text-brand-text tabular-nums tracking-tighter">00</span>
@@ -219,7 +219,6 @@
                 </div>
             </div>
             
-            <!-- Mobile only Seconds row -->
             <div class="flex justify-center sm:hidden mb-6 pointer-events-none items-center space-x-2">
                  <span id="seconds-mobile" class="font-serif text-4xl text-brand-accentDark tabular-nums tracking-tighter">00</span>
                  <span class="text-[10px] tracking-[0.2em] text-gray-400 mt-1 uppercase font-medium">Seconds</span>
@@ -237,11 +236,11 @@
             <div class="absolute inset-0 bg-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
         </button>
 
-        <!-- Hidden Message Container -->
+        <!-- Hidden Birthday Message Content -->
         <div id="hiddenMessageContainer" class="w-full max-w-lg px-6 z-20">
-            <div class="glass-panel p-8 md:p-10 rounded-2xl relative cursor-default">
+            <div class="glass-panel p-8 md:p-10 rounded-2xl relative cursor-default mt-4">
                 
-                <!-- Polaroid Image Frame -->
+                <!-- Polaroid Frame -->
                 <div class="w-48 h-56 mx-auto mb-8 relative group">
                     <div class="absolute inset-0 bg-white rounded-xl shadow-xl transform rotate-3 transition-transform duration-500 group-hover:rotate-6"></div>
                     <div class="absolute inset-0 bg-white rounded-xl shadow-lg p-2 transform -rotate-2 transition-transform duration-500 group-hover:-rotate-4 flex flex-col">
@@ -250,7 +249,7 @@
                     </div>
                 </div>
 
-                <p class="font-serif text-lg md:text-xl text-brand-text leading-relaxed italic mb-8">
+                <p class="font-serif text-lg md:text-xl text-brand-text leading-relaxed italic mb-8 text-center">
                     "Happy Birthday Khushi, <br/>
                     my cutie chan ❤️<br/><br/>
                     Every single day with you is a beautiful adventure. I am so incredibly lucky to have you in my life. <br/><br/>
@@ -274,7 +273,7 @@
     <script>
         lucide.createIcons();
 
-        // --- MUSIC LOGIC ---
+        // Music Logic
         const bgMusic = document.getElementById('bgMusic');
         const musicToggle = document.getElementById('musicToggle');
         const musicIcon = document.getElementById('musicIcon');
@@ -286,7 +285,7 @@
                 bgMusic.pause();
                 musicIcon.setAttribute('data-lucide', 'music');
             } else {
-                bgMusic.volume = 0.4;
+                bgMusic.volume = 0.5;
                 bgMusic.play().catch(() => {});
                 musicIcon.setAttribute('data-lucide', 'music-2'); 
             }
@@ -294,13 +293,13 @@
             lucide.createIcons();
         });
 
-        // --- TIMER LOGIC (Target: March 15) ---
+        // Timer Logic (March 15)
         function updateCountdown() {
             const now = new Date();
             const currentMonth = now.getMonth(); 
             const currentDay = now.getDate();
             
-            // Birthday Logic (March 15)
+            // Birthday Day Logic (March 15)
             if (currentMonth === 2 && currentDay === 15) {
                 document.getElementById('timerContainer').classList.add('hidden');
                 document.getElementById('standardHeader').classList.add('hidden');
@@ -328,7 +327,7 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        // --- INTERACTION LOGIC ---
+        // Interaction Logic
         const revealBtn = document.getElementById('revealBtn');
         const hiddenMessageContainer = document.getElementById('hiddenMessageContainer');
         const complimentBtn = document.getElementById('complimentBtn');
@@ -353,7 +352,7 @@
             e.stopPropagation();
             const now = new Date();
             
-            // Only reveals if it's March 15th
+            // Date Guard
             if (now.getMonth() !== 2 || now.getDate() !== 15) {
                 btnText.innerText = "Locked until March 15th ❤️";
                 setTimeout(() => { btnText.innerText = "Tap for a little message"; }, 2000);
@@ -383,7 +382,7 @@
             generateCompliment();
         });
 
-        // --- SAKURA PETALS ---
+        // Background Animation
         function createPetal() {
             const petal = document.createElement('div');
             const duration = Math.random() * 5 + 5;
@@ -396,7 +395,6 @@
         }
         setInterval(createPetal, 400);
 
-        // --- PARALLAX ---
         document.addEventListener('mousemove', (e) => {
             const x = (window.innerWidth - e.pageX * 2) / 100;
             const y = (window.innerHeight - e.pageY * 2) / 100;
