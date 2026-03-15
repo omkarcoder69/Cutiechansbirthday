@@ -245,7 +245,7 @@
                     <div class="absolute inset-0 bg-white rounded-xl shadow-xl transform rotate-3 transition-transform duration-500 group-hover:rotate-6"></div>
                     <div class="absolute inset-0 bg-white rounded-xl shadow-lg p-2 transform -rotate-2 transition-transform duration-500 group-hover:-rotate-4 flex flex-col">
                         <img src="image_0e7d24.png" alt="Khushi" class="w-full h-40 object-cover rounded-lg shadow-inner">
-                        <span class="font-serif text-brand-text text-sm text-center mt-3 italic text-gray-500">March 15th ❤️</span>
+                        <span class="font-serif text-brand-text text-sm text-center mt-3 italic text-gray-500">March 16th ❤️</span>
                     </div>
                 </div>
 
@@ -293,22 +293,22 @@
             lucide.createIcons();
         });
 
-        // Timer Logic (March 15)
+        // Timer Logic (March 16)
         function updateCountdown() {
             const now = new Date();
             const currentMonth = now.getMonth(); 
             const currentDay = now.getDate();
             
-            // Birthday Day Logic (March 15)
-            if (currentMonth === 2 && currentDay === 15) {
+            // Birthday Day Logic (March 16)
+            if (currentMonth === 2 && currentDay === 16) {
                 document.getElementById('timerContainer').classList.add('hidden');
                 document.getElementById('standardHeader').classList.add('hidden');
                 document.getElementById('birthdayHeader').classList.remove('hidden');
                 return;
             }
 
-            let targetDate = new Date(now.getFullYear(), 2, 15, 0, 0, 0); 
-            if (now > targetDate) targetDate = new Date(now.getFullYear() + 1, 2, 15, 0, 0, 0);
+            let targetDate = new Date(now.getFullYear(), 2, 16, 0, 0, 0); 
+            if (now > targetDate) targetDate = new Date(now.getFullYear() + 1, 2, 16, 0, 0, 0);
 
             const diff = targetDate - now;
             if (diff > 0) {
@@ -352,9 +352,9 @@
             e.stopPropagation();
             const now = new Date();
             
-            // Date Guard
-            if (now.getMonth() !== 2 || now.getDate() !== 15) {
-                btnText.innerText = "Locked until March 15th ❤️";
+            // Date Guard (Now updated to March 16th)
+            if (now.getMonth() !== 2 || now.getDate() !== 16) {
+                btnText.innerText = "Locked until March 16th ❤️";
                 setTimeout(() => { btnText.innerText = "Tap for a little message"; }, 2000);
                 return;
             }
