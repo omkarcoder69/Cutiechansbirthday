@@ -38,7 +38,6 @@
                         'fade-in-up': 'fadeInUp 1s ease-out forwards',
                         'float-slow': 'float 8s ease-in-out infinite',
                         'float-medium': 'float 6s ease-in-out infinite alternate',
-                        'float-fast': 'float 4s ease-in-out infinite alternate-reverse',
                         'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
                         'float-up': 'floatUp 1.5s ease-out forwards'
                     },
@@ -99,7 +98,7 @@
         }
 
         #hiddenMessageContainer.revealed {
-            max-height: 2000px;
+            max-height: 3000px;
             opacity: 1;
             transform: translateY(0);
             margin-top: 2rem;
@@ -137,6 +136,17 @@
         @keyframes fadeInText {
             0% { opacity: 0; transform: translateY(5px); }
             100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .polaroid-frame {
+            background: white;
+            padding: 12px 12px 40px 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.4s ease;
+        }
+        .polaroid-frame:hover {
+            transform: rotate(0deg) scale(1.02);
         }
     </style>
 </head>
@@ -241,11 +251,10 @@
             <div class="glass-panel p-8 md:p-10 rounded-2xl relative cursor-default mt-4">
                 
                 <!-- Polaroid Frame -->
-                <div class="w-48 h-56 mx-auto mb-8 relative group">
-                    <div class="absolute inset-0 bg-white rounded-xl shadow-xl transform rotate-3 transition-transform duration-500 group-hover:rotate-6"></div>
-                    <div class="absolute inset-0 bg-white rounded-xl shadow-lg p-2 transform -rotate-2 transition-transform duration-500 group-hover:-rotate-4 flex flex-col">
-                        <img src="image_0e7d24.png" alt="Khushi" class="w-full h-40 object-cover rounded-lg shadow-inner">
-                        <span class="font-serif text-brand-text text-sm text-center mt-3 italic text-gray-500">March 16th ❤️</span>
+                <div class="w-64 h-80 mx-auto mb-10 relative group">
+                    <div class="polaroid-frame rounded-sm">
+                        <img src="image_0e7d24.png" alt="Khushi" class="w-full h-64 object-cover grayscale-[20%] contrast-[1.1] rounded-sm shadow-inner" onerror="this.src='https://images.unsplash.com/photo-1518893063132-36e46dbe2428?q=80&w=400&auto=format&fit=crop'">
+                        <p class="font-serif text-brand-text text-sm mt-4 italic opacity-60">March 16th, 2026 ❤️</p>
                     </div>
                 </div>
 
@@ -352,7 +361,7 @@
             e.stopPropagation();
             const now = new Date();
             
-            // Date Guard (Now updated to March 16th)
+            // Date Guard
             if (now.getMonth() !== 2 || now.getDate() !== 16) {
                 btnText.innerText = "Locked until March 16th ❤️";
                 setTimeout(() => { btnText.innerText = "Tap for a little message"; }, 2000);
